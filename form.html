@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validazione Form</title>
+    <style>
+        .messaggio-errore {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Validazione Form</h2>
+
+    <form id="mioForm" onsubmit="return validaForm()">
+        <label for="username">Nome Utente:</label>
+        <input type="text" id="username" name="username">
+        <span id="erroreUsername" class="messaggio-errore"></span>
+
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <span id="erroreEmail" class="messaggio-errore"></span>
+
+        <br>
+
+        <input type="submit" value="Invia">
+    </form>
+
+    <script>
+        function validaForm() {
+            document.getElementById('erroreUsername').innerText = '';
+            document.getElementById('erroreEmail').innerText = '';
+
+            var username = document.getElementById('username').value;
+            var email = document.getElementById('email').value;
+
+            if (username.trim() === '') {
+                document.getElementById('erroreUsername').innerText = 'L\'username è obbligatorio';
+                return false;
+            }
+
+            var patternEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!patternEmail.test(email)) {
+                document.getElementById('erroreEmail').innerText = 'Formato email non valido';
+                return false;
+            }
+
+            alert('Form inviato con successo!');
+            return true;
+        }
+    </script>
+
+</body>
+
+</html>
